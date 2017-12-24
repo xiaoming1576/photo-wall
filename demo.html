@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>please enter your title</title>
+		<meta charset="utf-8">
+		<meta name="Author" content="陈建明">
+		<style type='text/css'>
+			*{ margin:0; padding:0;}
+			body,html{
+				height:80%;
+			}
+			li{
+				list-style:none;
+			}
+			#wrap{
+				width:90%;
+				height:90%;
+				position:absolute;
+				top:5%;
+				left:5%;
+			}
+			#wrap ul li{
+				width:125px;
+				height:125px;
+				box-shadow:0 0 1px #000;
+				position:absolute;
+				transition:.5s left,.5 top;
+				transform:rotate(-30deg);
+			}
+			#wrap ul li img{
+				transform:scale(0.95);
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<ul>
+				
+			</ul>
+		</div>	
+		
+
+		<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var $wrap=$('#wrap');
+				var $ul=$('#wrap ul');
+				
+				var $img=$('#wrap ul li img');
+
+				for(var i=0;i<24;i++){
+					$li=$('<li><img src="img/'+(i+1)+'.jpg" /></li>');
+					$ul.append($li);
+
+				}
+				liPosition();
+				liRot();
+				$(window).resize(liPosition);
+				function liPosition(){
+					var $wrapW=$wrap.width();
+					var $wrapH=$wrap.height();
+					var m=($wrapW-6*125)/5;
+					var n=($wrapH-4*125)/3;
+					$('#wrap ul li').each(function(i){
+						var iX=i%6;
+						var iY=parseInt(i/6);
+						$(this).css({
+							left:m*iX+iX*125+'px',
+							top:n*iY+iY*125+'px'
+						});
+					});
+				};
+				function liRot(){
+					$('#wrap ul li').each(function(){
+						var r=(Math.random()-0.5)*60;
+						$(this).css('transform','rotate('+r+'deg)');
+					});
+				}
+
+
+			});
+		</script>
+	</body>
+</html>
